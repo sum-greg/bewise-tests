@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: csaazefs
+      POSTGRES_PASSWORD: 5LfSVACTWkkS2rruUkRQ3xZkAbj_5KE_
+      POSTGRES_DB: csaazefs
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+volumes:
+  db_data:
